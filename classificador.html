@@ -2,7 +2,9 @@
 <html lang="pt-BR">
 
 <head>
-    <link rel="icon" type="image/png" href="favicon.ico">
+
+<link rel="icon" type="image/png" href="favicon.ico">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -15,82 +17,127 @@
 
 <style>
 
+/* =========================
+RESET
+========================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
+/* =========================
+BODY
+========================= */
+
 body{
     font-family:'Inter',sans-serif;
     min-height:100vh;
     overflow-x:hidden;
+
     background:
     radial-gradient(circle at top left,#3b82f6 0%,transparent 25%),
     radial-gradient(circle at bottom right,#2563eb 0%,transparent 25%),
     linear-gradient(135deg,#020617,#0f172a,#1e3a8a);
+
     padding:40px 20px;
     position:relative;
 }
 
+/* =========================
+EFEITOS FUNDO
+========================= */
+
 body::before{
     content:'';
     position:fixed;
+
     width:600px;
     height:600px;
+
     background:#3b82f6;
+
     filter:blur(140px);
+
     opacity:0.18;
+
     top:-200px;
     left:-200px;
+
     animation:flutuar 10s infinite alternate ease-in-out;
 }
 
 body::after{
     content:'';
     position:fixed;
+
     width:500px;
     height:500px;
+
     background:#0ea5e9;
+
     filter:blur(140px);
+
     opacity:0.15;
+
     bottom:-200px;
     right:-200px;
+
     animation:flutuar2 12s infinite alternate ease-in-out;
 }
 
 @keyframes flutuar{
+
     from{
         transform:translate(0,0);
     }
+
     to{
         transform:translate(80px,50px);
     }
 }
 
 @keyframes flutuar2{
+
     from{
         transform:translate(0,0);
     }
+
     to{
         transform:translate(-60px,-40px);
     }
 }
 
+/* =========================
+CONTAINER
+========================= */
+
 .container{
     position:relative;
     z-index:2;
+
     max-width:1400px;
     margin:auto;
+
     background:rgba(15,23,42,0.72);
+
     backdrop-filter:blur(30px);
+
     border:1px solid rgba(255,255,255,0.08);
+
     border-radius:36px;
+
     padding:40px;
+
     box-shadow:
     0 25px 80px rgba(0,0,0,0.45),
     inset 0 1px 0 rgba(255,255,255,0.08);
 }
+
+/* =========================
+TOPO
+========================= */
 
 .topo{
     margin-bottom:35px;
@@ -100,17 +147,30 @@ body::after{
     display:inline-flex;
     align-items:center;
     gap:10px;
+
     background:rgba(59,130,246,0.12);
+
     border:1px solid rgba(59,130,246,0.25);
+
     color:#93c5fd;
+
     padding:10px 16px;
+
     border-radius:999px;
+
     font-size:12px;
     font-weight:700;
+
     letter-spacing:1px;
+
     margin-bottom:24px;
+
     backdrop-filter:blur(10px);
 }
+
+/* =========================
+LOGO
+========================= */
 
 .logo{
     margin-bottom:20px;
@@ -119,6 +179,7 @@ body::after{
 .logo img{
     width:320px;
     max-width:100%;
+
     object-fit:contain;
 
     filter:
@@ -131,26 +192,47 @@ body::after{
     transform:scale(1.02);
 }
 
+/* =========================
+SUBTÍTULO
+========================= */
+
 .subtitulo{
     color:#cbd5e1;
+
     font-size:17px;
+
     max-width:800px;
+
     line-height:1.6;
 }
 
+/* =========================
+ÁREA
+========================= */
+
 .area{
     background:rgba(255,255,255,0.03);
+
     border:1px solid rgba(255,255,255,0.06);
+
     border-radius:28px;
+
     padding:24px;
+
     box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.04);
 }
 
+/* =========================
+CONFIG
+========================= */
+
 .config{
     display:flex;
     gap:20px;
+
     margin-bottom:20px;
+
     flex-wrap:wrap;
 }
 
@@ -161,18 +243,29 @@ body::after{
 
 .campo label{
     display:block;
+
     color:#cbd5e1;
+
     margin-bottom:8px;
+
     font-size:13px;
     font-weight:600;
 }
 
+/* =========================
+INPUT
+========================= */
+
 input{
     width:100%;
+
     border:none;
     outline:none;
+
     border-radius:18px;
+
     padding:16px;
+
     font-size:14px;
 
     background:
@@ -185,16 +278,28 @@ input{
     0 10px 30px rgba(0,0,0,0.25);
 }
 
+/* =========================
+TEXTAREA
+========================= */
+
 textarea{
     width:100%;
+
     border:none;
     outline:none;
+
     resize:vertical;
+
     border-radius:24px;
+
     padding:24px;
+
     font-size:14px;
+
     font-family:Consolas,monospace;
+
     line-height:1.7;
+
     transition:0.25s;
 }
 
@@ -218,19 +323,32 @@ textarea{
     0 0 30px rgba(59,130,246,0.25);
 }
 
+/* =========================
+RESULTADO
+========================= */
+
 .resultado{
     margin-top:24px;
+
     background:
     linear-gradient(180deg,#eff6ff,#dbeafe);
+
     border-radius:24px;
+
     padding:24px;
+
     color:#0f172a;
+
     overflow:auto;
 
     box-shadow:
     inset 0 0 0 1px rgba(59,130,246,0.18),
     0 10px 30px rgba(37,99,235,0.12);
 }
+
+/* =========================
+BLOCOS
+========================= */
 
 .bloco{
     margin-bottom:35px;
@@ -249,12 +367,21 @@ textarea{
     color:#dc2626;
 }
 
+/* =========================
+TABELA
+========================= */
+
 table{
     width:100%;
+
     border-collapse:collapse;
+
     background:white;
+
     border-radius:18px;
+
     overflow:hidden;
+
     font-size:13px;
 }
 
@@ -267,9 +394,12 @@ thead{
     background:#dc2626;
 }
 
-th,td{
+th,
+td{
     padding:14px;
+
     border:1px solid #dbeafe;
+
     text-align:left;
 }
 
@@ -277,18 +407,30 @@ tbody tr:nth-child(even){
     background:#f8fafc;
 }
 
+/* =========================
+BOTÕES
+========================= */
+
 .botoes{
     display:flex;
     gap:16px;
+
     margin-top:24px;
+
     flex-wrap:wrap;
 }
 
-button{
+button,
+.voltar{
     position:relative;
     overflow:hidden;
 
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
     border:none;
+
     border-radius:18px;
 
     padding:16px 24px;
@@ -302,6 +444,10 @@ button{
 
     transition:0.25s;
 
+    min-width:170px;
+}
+
+button{
     background:
     linear-gradient(135deg,#2563eb,#0ea5e9);
 
@@ -309,13 +455,18 @@ button{
     0 15px 30px rgba(37,99,235,0.28);
 }
 
-button::before{
+button::before,
+.voltar::before{
     content:'';
+
     position:absolute;
+
     width:100%;
     height:100%;
+
     top:0;
     left:-100%;
+
     background:
     linear-gradient(
         90deg,
@@ -327,28 +478,66 @@ button::before{
     transition:0.5s;
 }
 
-button:hover::before{
+button:hover::before,
+.voltar:hover::before{
     left:100%;
 }
 
-button:hover{
+button:hover,
+.voltar:hover{
     transform:translateY(-2px) scale(1.02);
+}
 
+button:hover{
     box-shadow:
     0 18px 40px rgba(37,99,235,0.38);
 }
 
-button:active{
+button:active,
+.voltar:active{
     transform:scale(0.98);
 }
 
+/* =========================
+BOTÃO VOLTAR
+========================= */
+
+.link-voltar{
+    text-decoration:none;
+}
+
+.voltar{
+    background:
+    linear-gradient(135deg,#dc2626,#ef4444);
+
+    box-shadow:
+    0 15px 30px rgba(220,38,38,0.28);
+}
+
+.voltar:hover{
+    box-shadow:
+    0 18px 40px rgba(220,38,38,0.38);
+}
+
+/* =========================
+FOOTER
+========================= */
+
 .footer{
     margin-top:25px;
+
     text-align:center;
+
     color:#94a3b8;
+
     font-size:13px;
+
     letter-spacing:1px;
 }
+
+/* =========================
+RESPONSIVO
+========================= */
 
 @media(max-width:768px){
 
@@ -360,60 +549,64 @@ button:active{
         width:240px;
     }
 
-    button{
+    button,
+    .voltar{
         width:100%;
     }
 }
 
-.voltar{
-    background: linear-gradient(135deg,#dc2626,#ef4444);
-    box-shadow: 0 15px 30px rgba(220,38,38,0.28);
-}
-
-.voltar:hover{
-    box-shadow: 0 18px 40px rgba(220,38,38,0.38);
-}
-
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<div class="topo">
+<header class="topo">
 
 <div class="badge">
 📊 CLASSIFICADOR AUTOMÁTICO - ATIVOS & EXPIRADOS
 </div>
 
 <div class="logo">
-    <img src="wesafer.png" alt="WE SAFER">
+<img src="wesafer.png" alt="WE SAFER">
 </div>
 
 <p class="subtitulo">
 Cole a lista bruta abaixo e gere automaticamente os ATIVOS e EXPIRADOS organizados em tabela padrão Teams.
 </p>
 
-</div>
+</header>
 
-<div class="area">
+<main class="area">
 
-<div class="config">
+<section class="config">
 
 <div class="campo">
-<label>DATA DE REFERÊNCIA</label>
-<input type="date" id="dataReferencia">
-</div>
+
+<label for="dataReferencia">
+DATA DE REFERÊNCIA
+</label>
+
+<input
+type="date"
+id="dataReferencia"
+>
 
 </div>
+
+</section>
 
 <textarea
 id="entrada"
 placeholder="Cole aqui sua lista bruta..."
 ></textarea>
 
-<div id="resultado" class="resultado"></div>
+<div
+id="resultado"
+class="resultado"
+></div>
 
 <div class="botoes">
 
@@ -429,170 +622,348 @@ COPIAR PARA TEAMS
 LIMPAR
 </button>
 
-<a href="index.html">
-    <button class="voltar">
-        VOLTAR
-    </button>
+<a href="index.html" class="link-voltar">
+
+<div class="voltar">
+VOLTAR
+</div>
+
 </a>
 
 </div>
 
-</div>
+</main>
 
-<div class="footer">
+<footer class="footer">
 WeSafer Produtos Digitais Ltda.
-</div>
+</footer>
 
 </div>
 
 <script>
 
+/* =========================
+PARSE DATA
+========================= */
+
 function parseData(data){
 
-    const anoAtual = new Date().getFullYear()
+    const anoAtual =
+    new Date().getFullYear()
 
-    const [dia,mes] = data.split("/")
+    const [dia,mes] =
+    data.split("/")
 
-    return new Date(anoAtual, mes - 1, dia)
+    return new Date(
+        anoAtual,
+        mes - 1,
+        dia
+    )
 }
+
+/* =========================
+FORMATAR NOME
+========================= */
 
 function formatarNome(nome){
 
-    return nome.replace(/\((.*?)\)/g,
+    nome = nome.replace(
+        /\((.*?)\)/g,
         "<strong><em>($1)</em></strong>"
     )
+
+    nome = nome.replace(
+        /AGUARDANDO LIBERAÇÃO/g,
+        "<strong><em>AGUARDANDO LIBERAÇÃO</em></strong>"
+    )
+
+    return nome
 }
+
+/* =========================
+GERAR
+========================= */
 
 function gerar(){
 
     const texto =
-    document.getElementById("entrada").value.trim()
+    document
+    .getElementById("entrada")
+    .value
+    .trim()
 
     const dataRefInput =
-    document.getElementById("dataReferencia").value
+    document
+    .getElementById("dataReferencia")
+    .value
 
     if(!texto || !dataRefInput){
 
-        alert("Preencha a data e cole a lista.")
+        alert(
+            "Preencha a data e cole a lista."
+        )
+
         return
     }
 
-    const dataRef = new Date(dataRefInput + "T00:00:00")
+    const dataRef =
+    new Date(
+        dataRefInput + "T00:00:00"
+    )
 
     const linhas =
-    texto.split("\n").filter(l => l.trim() !== "")
+    texto
+    .split("\n")
+    .filter(
+        linha => linha.trim() !== ""
+    )
 
     let ativos = []
     let expirados = []
 
     linhas.forEach(linha => {
 
-        let nome, site, chamado, inicio, fim
+        let nome
+        let site
+        let chamado
+        let inicio
+        let fim
 
-// FORMATO 1: com "-"
-if(linha.includes(" - ") && linha.includes(":")){
+        /* =========================
+        FORMATO 1
+        ========================= */
 
-    const partes = linha.split(" - ")
-    nome = partes[0].trim()
+        if(
+            linha.includes(" - ")
+            &&
+            linha.includes(":")
+        ){
 
-    const resto = partes[1].split(":")
+            const partes =
+            linha.split(" - ")
 
-    site = resto[0].trim()
+            nome =
+            partes[0].trim()
 
-    const dados = resto[1].trim().split(" ")
+            const resto =
+            partes[1].split(":")
 
-    chamado = parseInt(dados[0])
-    inicio = dados[1]
-    fim = dados[3]
+            site =
+            resto[0].trim()
 
-// FORMATO 2: tabela (TAB ou múltiplos espaços)
-}else{
+            const dados =
+            resto[1]
+            .trim()
+            .split(" ")
 
-    const partes = linha.split(/\s+/)
+            chamado =
+            parseInt(dados[0])
 
-    nome = partes.slice(0, partes.length - 4).join(" ")
+            inicio =
+            dados[1]
 
-    chamado = parseInt(partes[partes.length - 4])
-    site = partes[partes.length - 3]
-    inicio = partes[partes.length - 2]
-    fim = partes[partes.length - 1]
-}
+            fim =
+            dados[3]
+        }
 
-        const dataFim = parseData(fim)
+        /* =========================
+        FORMATO 2
+        ========================= */
 
-        const obj = {
+        else{
+
+            const partes =
+            linha.split(/\s+/)
+
+            nome =
+            partes
+            .slice(0, partes.length - 4)
+            .join(" ")
+
+            chamado =
+            parseInt(
+                partes[partes.length - 4]
+            )
+
+            site =
+            partes[partes.length - 3]
+
+            inicio =
+            partes[partes.length - 2]
+
+            fim =
+            partes[partes.length - 1]
+        }
+
+        const dataFim =
+        parseData(fim)
+
+        const item = {
+
             nome,
             site,
             chamado,
-            periodo:`${inicio} À ${fim}`
+
+            periodo:
+            `${inicio} À ${fim}`
         }
 
         if(dataFim <= dataRef){
 
-            expirados.push(obj)
+            expirados.push(item)
 
         }else{
 
-            ativos.push(obj)
+            ativos.push(item)
         }
+
     })
 
-    ativos.sort((a,b)=>a.chamado-b.chamado)
-    expirados.sort((a,b)=>a.chamado-b.chamado)
+    ativos.sort(
+        (a,b)=>a.chamado-b.chamado
+    )
+
+    expirados.sort(
+        (a,b)=>a.chamado-b.chamado
+    )
 
     function criarTabela(lista,tipo){
 
         if(lista.length === 0){
 
-            return "<p>Nenhum registro.</p>"
+            return `
+            <p>
+                Nenhum registro.
+            </p>
+            `
         }
 
         return `
+
         <div class="bloco ${tipo}">
-            <h2>${tipo === "ativos" ? "🟢 ATIVOS" : "🔴 EXPIRADOS"}</h2>
+
+            <h2>
+
+                ${
+                    tipo === "ativos"
+                    ? "🟢 ATIVOS"
+                    : "🔴 EXPIRADOS"
+                }
+
+            </h2>
 
             <table>
+
                 <thead>
+
                     <tr>
-                        <th>Nome do Técnico</th>
-                        <th>Nº do Chamado</th>
-                        <th>Site</th>
-                        <th>Período</th>
+
+                        <th>
+                            Nome do Técnico
+                        </th>
+
+                        <th>
+                            Nº do Chamado
+                        </th>
+
+                        <th>
+                            Site
+                        </th>
+
+                        <th>
+                            Período
+                        </th>
+
                     </tr>
+
                 </thead>
 
                 <tbody>
 
-                ${lista.map(item=>`
+                    ${lista.map(item => `
+
                     <tr>
-                        <td>${formatarNome(item.nome)}</td>
-                        <td>${item.chamado}</td>
-                        <td>${item.site}</td>
-                        <td>${item.periodo}</td>
+
+                        <td>
+                            ${formatarNome(item.nome)}
+                        </td>
+
+                        <td>
+                            ${item.chamado}
+                        </td>
+
+                        <td>
+                            ${item.site}
+                        </td>
+
+                        <td>
+                            ${item.periodo}
+                        </td>
+
                     </tr>
-                `).join("")}
+
+                    `).join("")}
 
                 </tbody>
+
             </table>
+
         </div>
+
         `
     }
 
-    document.getElementById("resultado").innerHTML =
-    criarTabela(ativos,"ativos") +
-    criarTabela(expirados,"expirados")
+    document
+   const [ano, mes, dia] =
+dataRefInput.split("-")
+
+const dataFormatada =
+`${dia}/${mes}/${ano}`
+
+const cabecalho = `
+
+<div style="
+margin-bottom:25px;
+font-weight:700;
+font-size:15px;
+line-height:1.7;
+">
+
+Boa noite,<br><br>
+
+SEGUE A LISTA ATUALIZADA DE ACESSOS AUTORIZADOS - ${dataFormatada}
+
+</div>
+
+`
+
+document
+.getElementById("resultado")
+.innerHTML =
+
+cabecalho +
+
+criarTabela(ativos,"ativos")
++
+criarTabela(expirados,"expirados")
 }
+
+/* =========================
+COPIAR
+========================= */
 
 function copiarTabela(){
 
     const resultado =
     document.getElementById("resultado")
 
-    const range = document.createRange()
+    const range =
+    document.createRange()
 
     range.selectNode(resultado)
 
-    const selection = window.getSelection()
+    const selection =
+    window.getSelection()
 
     selection.removeAllRanges()
 
@@ -602,16 +973,28 @@ function copiarTabela(){
 
     selection.removeAllRanges()
 
-    alert("TABELA COPIADA PARA O TEAMS!")
+    alert(
+        "TABELA COPIADA PARA O TEAMS!"
+    )
 }
+
+/* =========================
+LIMPAR
+========================= */
 
 function limparTudo(){
 
-    document.getElementById("entrada").value = ""
+    document
+    .getElementById("entrada")
+    .value = ""
 
-    document.getElementById("resultado").innerHTML = ""
+    document
+    .getElementById("resultado")
+    .innerHTML = ""
 
-    document.getElementById("dataReferencia").value = ""
+    document
+    .getElementById("dataReferencia")
+    .value = ""
 }
 
 </script>
