@@ -2,396 +2,104 @@
 <html lang="pt-BR">
 
 <head>
-    <link rel="icon" type="image/png" href="favicon.ico">
+<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>FORMATADOR PADRÃO ACESSO</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:'Inter',sans-serif;
-    min-height:100vh;
-    overflow-x:hidden;
-    background:
-    radial-gradient(circle at top left,#3b82f6 0%,transparent 25%),
-    radial-gradient(circle at bottom right,#2563eb 0%,transparent 25%),
-    linear-gradient(135deg,#020617,#0f172a,#1e3a8a);
-    padding:40px 20px;
-    position:relative;
-}
-
-body::before{
-    content:'';
-    position:fixed;
-    width:600px;
-    height:600px;
-    background:#3b82f6;
-    filter:blur(140px);
-    opacity:0.18;
-    top:-200px;
-    left:-200px;
-    animation:flutuar 10s infinite alternate ease-in-out;
-}
-
-body::after{
-    content:'';
-    position:fixed;
-    width:500px;
-    height:500px;
-    background:#0ea5e9;
-    filter:blur(140px);
-    opacity:0.15;
-    bottom:-200px;
-    right:-200px;
-    animation:flutuar2 12s infinite alternate ease-in-out;
-}
-
-@keyframes flutuar{
-    from{
-        transform:translate(0,0);
-    }
-    to{
-        transform:translate(80px,50px);
-    }
-}
-
-@keyframes flutuar2{
-    from{
-        transform:translate(0,0);
-    }
-    to{
-        transform:translate(-60px,-40px);
-    }
-}
-
-.container{
-    position:relative;
-    z-index:2;
-    max-width:1250px;
-    margin:auto;
-    background:rgba(15,23,42,0.72);
-    backdrop-filter:blur(30px);
-    border:1px solid rgba(255,255,255,0.08);
-    border-radius:36px;
-    padding:40px;
-    box-shadow:
-    0 25px 80px rgba(0,0,0,0.45),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-}
-
-.topo{
-    margin-bottom:35px;
-}
-
-.badge{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    background:rgba(59,130,246,0.12);
-    border:1px solid rgba(59,130,246,0.25);
-    color:#93c5fd;
-    padding:10px 16px;
-    border-radius:999px;
-    font-size:12px;
-    font-weight:700;
-    letter-spacing:1px;
-    margin-bottom:24px;
-    backdrop-filter:blur(10px);
-}
-
-.logo{
-    margin-bottom:20px;
-}
-
-.logo img{
-    width:320px;
-    max-width:100%;
-    object-fit:contain;
-
-    filter:
-    drop-shadow(0 0 18px rgba(59,130,246,0.35));
-
-    transition:0.3s;
-}
-
-.logo img:hover{
-    transform:scale(1.02);
-}
-
-.subtitulo{
-    color:#cbd5e1;
-    font-size:17px;
-    max-width:700px;
-    line-height:1.6;
-}
-
-.area{
-    background:rgba(255,255,255,0.03);
-    border:1px solid rgba(255,255,255,0.06);
-    border-radius:28px;
-    padding:24px;
-    box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.04);
-}
-
-textarea{
-    width:100%;
-    border:none;
-    outline:none;
-    resize:vertical;
-    border-radius:24px;
-    padding:24px;
-    font-size:14px;
-    font-family:Consolas,monospace;
-    line-height:1.7;
-    transition:0.25s;
-}
-
-#entrada{
-    height:320px;
-
-    background:
-    linear-gradient(180deg,#0f172a,#111827);
-
-    color:#e2e8f0;
-
-    box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.06),
-    0 10px 30px rgba(0,0,0,0.25);
-}
-
-#entrada:focus{
-
-    box-shadow:
-    inset 0 0 0 1px #3b82f6,
-    0 0 30px rgba(59,130,246,0.25);
-}
-
-#saida{
-    height:520px;
-    margin-top:24px;
-
-    background:
-    linear-gradient(180deg,#eff6ff,#dbeafe);
-
-    color:#0f172a;
-
-    box-shadow:
-    inset 0 0 0 1px rgba(59,130,246,0.18),
-    0 10px 30px rgba(37,99,235,0.12);
-}
-
-.botoes{
-    display:flex;
-    gap:16px;
-    margin-top:24px;
-    flex-wrap:wrap;
-}
-
-button{
-    position:relative;
-    overflow:hidden;
-
-    border:none;
-    border-radius:18px;
-
-    padding:16px 24px;
-
-    font-size:14px;
-    font-weight:700;
-
-    color:white;
-
-    cursor:pointer;
-
-    transition:0.25s;
-
-    background:
-    linear-gradient(135deg,#2563eb,#0ea5e9);
-
-    box-shadow:
-    0 15px 30px rgba(37,99,235,0.28);
-}
-
-button::before{
-    content:'';
-    position:absolute;
-    width:100%;
-    height:100%;
-    top:0;
-    left:-100%;
-    background:
-    linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.25),
-        transparent
-    );
-
-    transition:0.5s;
-}
-
-button:hover::before{
-    left:100%;
-}
-
-button:hover{
-    transform:translateY(-2px) scale(1.02);
-
-    box-shadow:
-    0 18px 40px rgba(37,99,235,0.38);
-}
-
-button:active{
-    transform:scale(0.98);
-}
-
-.footer{
-    margin-top:25px;
-    text-align:center;
-    color:#94a3b8;
-    font-size:13px;
-    letter-spacing:1px;
-}
-
-@media(max-width:768px){
-
-    .container{
-        padding:24px;
-    }
-
-    .logo img{
-        width:240px;
-    }
-
-    button{
-        width:100%;
-    }
-}
-
-.classificador{
-    background: linear-gradient(135deg,#16a34a,#22c55e);
-    box-shadow: 0 15px 30px rgba(34,197,94,0.28);
-}
-
-.classificador:hover{
-    box-shadow: 0 18px 40px rgba(34,197,94,0.38);
-}
-
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
+<div class="layout-sistema">
+
+<aside class="sidebar">
+    <div class="sidebar-logo">
+        <img src="assets/img/wesafer.png" alt="WE SAFER">
+    </div>
+
+<nav class="sidebar-menu">
+
+<a href="index.html">
+📋 FORMATADOR
+</a>
+
+<a href="conversor.html">
+🔁 CONVERSOR
+</a>
+
+<a href="classificador.html">
+📊 CLASSIFICADOR
+</a>
+
+</nav>
+</aside>
+
+<div class="conteudo-sistema">
+
 <div class="container">
 
 <div class="topo">
+    <div class="badge">⚡ FORMATADOR AUTOMÁTICO DE MÁSCARA PADRÃO ⚡</div>
 
-<div class="badge">
-⚡ FORMATADOR AUTOMÁTICO DE MÁSCARA PADRÃO⚡
-</div>
+    <div class="logo">
+        <img src="assets/img/wesafer.png" alt="WE SAFER">
+    </div>
 
-<div class="logo">
-    <img src="wesafer.png" alt="WE SAFER">
-</div>
-
-<p class="subtitulo">
-Cole o chamado bruto abaixo e gere automaticamente no padrão corporativo.
-</p>
-
+    <p class="subtitulo">
+        Cole o chamado bruto abaixo e gere automaticamente no padrão corporativo.
+    </p>
 </div>
 
 <div class="area">
 
-<textarea
-id="entrada"
-placeholder="Cole aqui o texto do chamado..."
-></textarea>
+<textarea id="entrada" placeholder="Cole aqui o texto do chamado..."></textarea>
 
 <div class="botoes">
-
-<button onclick="formatar()">
-FORMATAR
-</button>
-
-<button onclick="copiarResultado()">
-COPIAR TEXTO
-</button>
-
-<button onclick="limparTudo()">
-LIMPAR
-</button>
-
-<a href="classificador.html">
-    <button class="classificador">
-        CLASSIFICADOR
-    </button>
-</a>
-
+    <button onclick="formatar()">FORMATAR</button>
+    <button class="btn-copiar" onclick="copiarResultado()">COPIAR TEXTO</button>
+    <button class="btn-limpar" onclick="limparTudo()">LIMPAR</button>
 </div>
 
 <textarea id="saida" readonly></textarea>
 
 </div>
 
-<div class="footer">
-WeSafer Produtos Digitais Ltda.
+<div class="footer">WeSafer Produtos Digitais Ltda.</div>
+
 </div>
 
+</div>
 </div>
 
 <script>
-
 function pegar(regex,texto){
-
     const match = texto.match(regex)
-
     return match ? match[1].trim() : ""
 }
 
 function formatarData(data){
-
     if(!data) return ""
-
     const partes = data.split("-")
-
     return `${partes[2]}/${partes[1]}`
 }
 
 function ajustarSite(site){
-
     if(!site) return ""
-
     site = site.trim()
 
     if(site.includes("_")){
-
         const [sigla,estado] = site.split("_")
-
         return `${estado}${sigla}`.replace(/[^A-Z0-9]/gi,"")
     }
 
     if(site.includes("-")){
-
         const partes = site.split("-")
-
         if(partes.length === 2){
-
-            return `${partes[1]}${partes[0]}`
-            .replace(/[^A-Z0-9]/gi,"")
+            return `${partes[1]}${partes[0]}`.replace(/[^A-Z0-9]/gi,"")
         }
     }
 
@@ -399,84 +107,36 @@ function ajustarSite(site){
 }
 
 function formatar(){
+    const texto = document.getElementById("entrada").value
 
-    const texto =
-    document.getElementById("entrada").value
+    const ticket = pegar(/\((\d+)\)/,texto)
+    const tecnico = pegar(/ome completo\s+([^\n]+)/i,texto).toUpperCase()
+    const supervisor = pegar(/Supervisor\s+([^\n]+)/i,texto).toUpperCase()
+    const empresa = pegar(/Empresa Solicitante\s+Empresa Solicitante\s+([^\n]+)/i,texto).toUpperCase()
+    const siteOriginal = pegar(/Site a ser Acessado\s+([^\n]+)/i,texto)
+    const siteAjustado = ajustarSite(siteOriginal)
 
-    const ticket =
-    pegar(/\((\d+)\)/,texto)
-
-    const tecnico =
-    pegar(/ome completo\s+([^\n]+)/i,texto)
-    .toUpperCase()
-
-    const supervisor =
-    pegar(/Supervisor\s+([^\n]+)/i,texto)
-    .toUpperCase()
-
-    const empresa =
-    pegar(
-        /Empresa Solicitante\s+Empresa Solicitante\s+([^\n]+)/i,
-        texto
-    ).toUpperCase()
-
-    const siteOriginal =
-    pegar(
-        /Site a ser Acessado\s+([^\n]+)/i,
-        texto
-    )
-
-    const siteAjustado =
-    ajustarSite(siteOriginal)
-
-    const dataInicial =
-    formatarData(
-        pegar(
-            /data inicial\s+(\d{4}-\d{2}-\d{2})/i,
-            texto
-        )
-    )
-
-    const dataFinal =
-    formatarData(
-        pegar(
-            /data final\s+(\d{4}-\d{2}-\d{2})/i,
-            texto
-        )
-    )
-
-    const periodo =
-    `${dataInicial} À ${dataFinal}`
+    const dataInicial = formatarData(pegar(/data inicial\s+(\d{4}-\d{2}-\d{2})/i,texto))
+    const dataFinal = formatarData(pegar(/data final\s+(\d{4}-\d{2}-\d{2})/i,texto))
+    const periodo = `${dataInicial} À ${dataFinal}`
 
     let acao = ""
-
     const linhas = texto.split("\n")
-
-    const indice =
-    linhas.findIndex(l =>
-        l.toLowerCase().includes("ação a ser realizada")
-    )
+    const indice = linhas.findIndex(l => l.toLowerCase().includes("ação a ser realizada"))
 
     if(indice !== -1 && linhas[indice + 1]){
-
         acao = linhas[indice + 1].trim()
     }
 
     acao = acao.toUpperCase()
 
     if(!acao.endsWith(".")){
-
         acao += "."
     }
 
-    const portaOperadora =
-    texto.toLowerCase().includes("porta operadora")
-
-    const implantacao =
-    texto.toLowerCase().includes("implantação")
-
-    const operacao =
-    texto.toLowerCase().includes("operação")
+    const portaOperadora = texto.toLowerCase().includes("porta operadora")
+    const implantacao = texto.toLowerCase().includes("implantação")
+    const operacao = texto.toLowerCase().includes("operação")
 
     const resultado =
 `TÉCNICO: ${tecnico} - ${siteAjustado}: ${ticket} ${periodo}
@@ -503,26 +163,19 @@ TICKET: ${ticket}
 TÉCNICO: ${tecnico}
 AÇÃO: ${acao}`
 
-    document.getElementById("saida").value =
-    resultado
+    document.getElementById("saida").value = resultado
 }
 
 function copiarResultado(){
-
-    const saida =
-    document.getElementById("saida")
-
+    const saida = document.getElementById("saida")
     navigator.clipboard.writeText(saida.value)
-
     alert("TEXTO COPIADO!")
 }
 
 function limparTudo(){
-
     document.getElementById("entrada").value = ""
     document.getElementById("saida").value = ""
 }
-
 </script>
 
 </body>

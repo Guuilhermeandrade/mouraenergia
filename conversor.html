@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<link rel="icon" type="image/png" href="assets/img/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CONVERSOR DE LISTAS</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+.painel-revisao{
+    margin-top:24px;
+    background:linear-gradient(180deg,#eff6ff,#dbeafe);
+    border-radius:24px;
+    padding:24px;
+    color:#0f172a;
+    box-shadow:
+    inset 0 0 0 1px rgba(59,130,246,0.18),
+    0 10px 30px rgba(37,99,235,0.12);
+}
+
+.painel-revisao:empty{
+    display:none;
+}
+
+.abas-conversor{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:14px;
+    margin-top:24px;
+}
+
+.aba-card{
+    border:none;
+    border-radius:20px;
+    padding:18px;
+    color:white;
+    cursor:pointer;
+    text-align:left;
+    transition:0.25s;
+    box-shadow:0 12px 28px rgba(0,0,0,0.22);
+}
+
+.aba-card:hover,
+.aba-card.ativo{
+    transform:translateY(-3px) scale(1.02);
+    box-shadow:0 18px 38px rgba(37,99,235,0.35);
+}
+
+.aba-card span{
+    display:block;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:0.8px;
+    color:rgba(255,255,255,0.85);
+    margin-bottom:6px;
+}
+
+.aba-card strong{
+    display:block;
+    font-size:30px;
+    font-weight:900;
+}
+
+.card-convertidos{ background:linear-gradient(135deg,#16a34a,#22c55e); }
+.card-revisar{ background:linear-gradient(135deg,#ca8a04,#eab308); }
+.item-revisao{
+    background:white;
+    border:1px solid #dbeafe;
+    border-radius:18px;
+    padding:16px;
+    margin-bottom:14px;
+}
+
+.item-revisao label{
+    display:block;
+    font-size:12px;
+    font-weight:800;
+    color:#475569;
+    margin-bottom:8px;
+}
+
+.item-revisao input{
+    background:#f8fafc;
+    color:#0f172a;
+    box-shadow:inset 0 0 0 1px #dbeafe;
+    margin-bottom:10px;
+}
+
+.motivo{
+    font-size:12px;
+    font-weight:800;
+    color:#dc2626;
+    margin-bottom:12px;
+}
+
+.texto-original{
+    font-size:12px;
+    color:#475569;
+    background:#f8fafc;
+    padding:10px;
+    border-radius:12px;
+    margin-bottom:12px;
+    word-break:break-word;
+}
+
+.botoes-revisao{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:8px;
+}
+
+.botoes-revisao button{
+    min-height:40px;
+    padding:10px 14px;
+    font-size:12px;
+    border-radius:14px;
+}
+
+.lista-final{
+    width:100%;
+    min-height:260px;
+    background:white;
+    color:#0f172a;
+    border:1px solid #dbeafe;
+    border-radius:18px;
+    padding:16px;
+    font-family:Consolas,monospace;
+    font-size:13px;
+    line-height:1.7;
+    resize:vertical;
+}
+
+.titulo-painel{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:16px;
+    flex-wrap:wrap;
+}
+
+.titulo-painel h2{
+    font-size:18px;
+}
+
+@media(max-width:768px){
+    .titulo-painel{
+        align-items:flex-start;
+    }
+}
+
+.config-bloqueados{
+    margin-top:24px;
+    background:rgba(255,255,255,0.035);
+    border:1px solid rgba(255,255,255,0.07);
+    border-radius:24px;
+    padding:20px;
+    color:#e2e8f0;
+}
+
+.config-bloqueados summary{
+    cursor:pointer;
+    font-weight:800;
+    color:#93c5fd;
+    margin-bottom:14px;
+}
+
+.config-bloqueados textarea{
+    margin-top:14px;
+    min-height:130px;
+    background:linear-gradient(180deg,#0f172a,#111827);
+    color:#e2e8f0;
+}
+
+.config-bloqueados .dica{
+    color:#cbd5e1;
+    font-size:13px;
+    line-height:1.5;
+    margin-top:8px;
+}
+
+
+/* AJUSTES VISUAIS - CONFIGURAÇÃO DISCRETA E CARDS COMPACTOS */
+.config-bloqueados{
+    margin-top:22px;
+    background:rgba(15,23,42,0.35);
+    border:1px solid rgba(148,163,184,0.18);
+    border-radius:18px;
+    padding:14px 16px;
+    color:#cbd5e1;
+}
+
+.config-bloqueados summary{
+    cursor:pointer;
+    font-weight:800;
+    color:#93c5fd;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.config-bloqueados .dica{
+    color:#94a3b8;
+    font-size:12px;
+    line-height:1.5;
+    margin-top:6px;
+}
+
+.config-bloqueados textarea{
+    margin-top:12px;
+    min-height:95px;
+    max-height:150px;
+    background:linear-gradient(180deg,#0f172a,#111827);
+    color:#e2e8f0;
+    font-size:12px;
+    border-radius:16px;
+    padding:14px;
+}
+
+.config-bloqueados .botoes{
+    margin-top:12px;
+}
+
+.config-bloqueados button{
+    min-height:42px;
+    padding:10px 16px;
+    font-size:12px;
+    border-radius:14px;
+}
+
+.abas-conversor{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:12px;
+    margin-top:22px;
+}
+
+.aba-card{
+    border:none;
+    border-radius:16px;
+    padding:14px 16px;
+    color:#e2e8f0;
+    cursor:pointer;
+    text-align:left;
+    transition:0.25s;
+    box-shadow:0 10px 22px rgba(0,0,0,0.18);
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.aba-card:hover,
+.aba-card.ativo{
+    transform:translateY(-2px);
+    box-shadow:0 14px 28px rgba(37,99,235,0.24);
+    border-color:rgba(147,197,253,0.35);
+}
+
+.aba-card span{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:0.8px;
+    color:#cbd5e1;
+    margin-bottom:4px;
+}
+
+.aba-card strong{
+    display:block;
+    font-size:24px;
+    font-weight:900;
+    color:white;
+}
+
+.card-convertidos{
+    background:linear-gradient(135deg,rgba(22,163,74,0.85),rgba(34,197,94,0.85));
+}
+
+.card-revisar{
+    background:linear-gradient(135deg,rgba(202,138,4,0.85),rgba(234,179,8,0.85));
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="layout-sistema">
+
+<aside class="sidebar">
+    <div class="sidebar-logo">
+        <img src="assets/img/wesafer.png" alt="WE SAFER">
+    </div>
+
+<nav class="sidebar-menu">
+
+<a href="index.html">
+📋 FORMATADOR
+</a>
+
+<a href="conversor.html">
+🔁 CONVERSOR
+</a>
+
+<a href="classificador.html">
+📊 CLASSIFICADOR
+</a>
+
+</nav>
+</aside>
+
+<div class="conteudo-sistema">
+
+<div class="container">
+
+<header class="topo">
+    <div class="badge">🔁 CONVERSOR INTELIGENTE DE LISTAS</div>
+
+    <div class="logo">
+        <img src="assets/img/wesafer.png" alt="WE SAFER">
+    </div>
+
+    <p class="subtitulo">
+        Converta listas para o padrão corporativo. Linhas claramente inúteis são ignoradas; dúvidas ficam em revisão para você corrigir.
+    </p>
+</header>
+
+<main class="area">
+
+<textarea id="entrada" placeholder="Cole aqui a lista bagunçada..."></textarea>
+
+<div class="botoes">
+    <button onclick="converterLista()">CONVERTER LISTA</button>
+    <button class="btn-copiar" onclick="copiarResultadoFinal()">COPIAR FINAL</button>
+    <button class="btn-limpar" onclick="limparTudo()">LIMPAR</button>
+</div>
+
+<details class="config-bloqueados">
+    <summary>⚙️ CONFIGURAÇÕES DE VALIDAÇÃO</summary>
+
+    <p class="dica">
+        Palavras cadastradas aqui nunca serão aceitas como SITE. Elas irão para REVISÃO.
+        Use uma por linha. Exemplo: PABLO, ALVES, ROCHA, PAULA.
+    </p>
+
+    <textarea id="sitesBloqueados"></textarea>
+
+    <div class="botoes">
+        <button onclick="salvarSitesBloqueados()">SALVAR LISTA</button>
+    </div>
+</details>
+
+<section id="abasConversor" class="abas-conversor"></section>
+
+<section id="painelRevisao" class="painel-revisao"></section>
+
+</main>
+
+<footer class="footer">WeSafer Produtos Digitais Ltda.</footer>
+
+</div>
+
+</div>
+</div>
+
+<script>
+const UFS = "AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO"
+const REGEX_SITE_VALIDO = new RegExp("\\b(" + UFS + ")[A-Z0-9]{3}\\b","i")
+const REGEX_SITE_VALIDO_GLOBAL = new RegExp("\\b(" + UFS + ")[A-Z0-9]{3}\\b","gi")
+const REGEX_SITE_QUALQUER = /\b[A-Z0-9]{5}\b/i
+const REGEX_SITE_QUALQUER_GLOBAL = /\b[A-Z0-9]{5}\b/gi
+
+const SITES_BLOQUEADOS_PADRAO = [
+    "PABLO","ALVES","ROCHA","PAULA","SILVA","COSTA","LEITE","JESUS",
+    "BRITO","CAZAL","PAIVA","LIMA","NEVES","LOPES","SOUZA","SANTO",
+    "PANAIA","MARIA"
+]
+
+let sitesBloqueados = []
+
+let dados = {
+    convertidos: [],
+    revisar: []
+}
+
+let abaAtual = "convertidos"
+
+function carregarSitesBloqueados(){
+    const salvo = localStorage.getItem("sitesBloqueadosConversor")
+
+    if(salvo){
+        sitesBloqueados = salvo
+            .split(/\n|,|;/)
+            .map(item => item.trim().toUpperCase())
+            .filter(Boolean)
+    }else{
+        sitesBloqueados = [...SITES_BLOQUEADOS_PADRAO]
+    }
+
+    const campo = document.getElementById("sitesBloqueados")
+
+    if(campo){
+        campo.value = sitesBloqueados.join("\n")
+    }
+}
+
+function salvarSitesBloqueados(){
+    const campo = document.getElementById("sitesBloqueados")
+
+    sitesBloqueados = campo.value
+        .split(/\n|,|;/)
+        .map(item => item.trim().toUpperCase())
+        .filter(Boolean)
+
+    localStorage.setItem("sitesBloqueadosConversor", sitesBloqueados.join("\n"))
+
+    alert("LISTA DE SITES BLOQUEADOS SALVA!")
+}
+
+function restaurarSitesBloqueados(){
+    sitesBloqueados = [...SITES_BLOQUEADOS_PADRAO]
+
+    localStorage.setItem("sitesBloqueadosConversor", sitesBloqueados.join("\n"))
+
+    document.getElementById("sitesBloqueados").value = sitesBloqueados.join("\n")
+
+    alert("LISTA PADRÃO RESTAURADA!")
+}
+
+function siteBloqueado(site){
+    if(!site) return false
+
+    return sitesBloqueados.includes(site.toUpperCase())
+}
+
+function adicionarSiteBloqueado(site){
+    site = (site || "").trim().toUpperCase()
+
+    if(!site){
+        alert("Nenhum site suspeito encontrado.")
+        return
+    }
+
+    if(!sitesBloqueados.includes(site)){
+        sitesBloqueados.push(site)
+        localStorage.setItem("sitesBloqueadosConversor", sitesBloqueados.join("\n"))
+
+        const campo = document.getElementById("sitesBloqueados")
+        if(campo){
+            campo.value = sitesBloqueados.join("\n")
+        }
+    }
+
+    alert(`${site} ADICIONADO À LISTA DE BLOQUEADOS!`)
+}
+
+function normalizarLinha(linha){
+    return linha
+        .replace(/\t/g," ")
+        .replace(/\s+/g," ")
+        .replace(/\s+a\s+/gi," À ")
+        .replace(/\s+à\s+/gi," À ")
+        .trim()
+}
+
+function linhaIgnorada(linha){
+    const t = linha.toUpperCase().trim()
+
+    return (
+        !t ||
+
+        t.includes("NOME DO TÉCNICO") ||
+        t.includes("Nº DO CHAMADO") ||
+        t.includes("N° DO CHAMADO") ||
+        t.includes("TÉCNICO CHAMADO SITE INÍCIO FIM") ||
+        t.includes("TÉCNICO CHAMADO SITE INICIO FIM") ||
+        t.includes("TECNICO CHAMADO SITE INICIO FIM") ||
+
+        t === "TÉCNICO" ||
+        t === "TECNICO" ||
+        t === "CHAMADO" ||
+        t === "SITE" ||
+        t === "INÍCIO" ||
+        t === "INICIO" ||
+        t === "FIM" ||
+        t === "PERÍODO" ||
+        t === "PERIODO" ||
+        t === "ATIVOS" ||
+        t === "EXPIRADOS" ||
+
+        t.startsWith("PARTE ") ||
+
+        t.startsWith("BOA TARDE") ||
+        t.startsWith("BOA NOITE") ||
+        t.startsWith("BOM DIA") ||
+
+        t.includes("SEGUE A LISTA") ||
+        t.includes("ACESSOS AUTORIZADOS") ||
+
+        /^[-_=]{3,}$/.test(t)
+    )
+}
+
+function limparNome(nome){
+    nome = nome || ""
+
+    let observacoes = []
+
+    nome = nome.replace(/\((.*?)\)/g,function(match){
+        observacoes.push(match.toUpperCase())
+        return " "
+    })
+
+    nome = nome
+        .replace(/\bÀ\b/gi," ")
+        .replace(/[-:;|]/g," ")
+        .replace(/\s+/g," ")
+        .trim()
+        .toUpperCase()
+
+    if(observacoes.length){
+        nome = `${nome} ${observacoes.join(" ")}`.trim()
+    }
+
+    return nome
+}
+
+function extrairBasico(linha){
+    linha = normalizarLinha(linha)
+
+    const datas = linha.match(/\d{2}\/\d{2}/g)
+    const chamadoMatch = linha.match(/\b\d{4,6}\b/)
+
+    const dataInicial = datas && datas.length >= 2 ? datas[0] : ""
+    const dataFinal = datas && datas.length >= 2 ? datas[1] : ""
+    const chamado = chamadoMatch ? chamadoMatch[0] : ""
+
+    const candidatosValidos = linha.match(REGEX_SITE_VALIDO_GLOBAL) || []
+    const candidatosQualquer = linha.match(REGEX_SITE_QUALQUER_GLOBAL) || []
+
+    let site = ""
+    let siteSuspeito = ""
+
+    for(const candidato of candidatosValidos){
+        const c = candidato.toUpperCase()
+
+        if(!siteBloqueado(c)){
+            site = c
+            break
+        }
+
+        if(!siteSuspeito){
+            siteSuspeito = c
+        }
+    }
+
+    if(!site && !siteSuspeito){
+        for(const candidato of candidatosQualquer){
+            const c = candidato.toUpperCase()
+
+            if(!siteBloqueado(c)){
+                siteSuspeito = c
+                break
+            }
+
+            if(!siteSuspeito){
+                siteSuspeito = c
+            }
+        }
+    }
+
+    let base = linha
+
+    if(dataInicial){
+        base = linha.split(dataInicial)[0].trim()
+    }
+
+    if(chamado){
+        base = base.replace(chamado," ")
+    }
+
+    if(site){
+        base = base.replace(site," ")
+    }else if(siteSuspeito){
+        base = base.replace(siteSuspeito," ")
+    }
+
+    base = base
+        .replace(/\s+À\s*-\s*/gi," ")
+        .replace(/\s+À\s*/gi," ")
+        .replace(/\s*-\s*/g," ")
+        .replace(/\s*:\s*/g," ")
+        .replace(/\s+/g," ")
+        .trim()
+
+    const nome = limparNome(base)
+
+    return {
+        original: linha,
+        nome,
+        site,
+        siteSuspeito,
+        chamado,
+        dataInicial,
+        dataFinal
+    }
+}
+
+function montarLinha(item){
+    return `${item.nome} - ${item.site}: ${item.chamado} ${item.dataInicial} À ${item.dataFinal}`
+}
+
+function converterLinha(linha){
+    linha = normalizarLinha(linha)
+
+    if(linhaIgnorada(linha)){
+        return null
+    }
+
+    const item = extrairBasico(linha)
+
+    const motivos = []
+
+    if(!item.nome || item.nome.length < 5){
+        motivos.push("NOME NÃO IDENTIFICADO")
+    }
+
+    if(!item.chamado){
+        motivos.push("CHAMADO NÃO IDENTIFICADO")
+    }
+
+    if(!item.dataInicial || !item.dataFinal){
+        motivos.push("PERÍODO NÃO IDENTIFICADO")
+    }
+
+    if(!item.site){
+        motivos.push(item.siteSuspeito ? `SITE SUSPEITO/BLOQUEADO: ${item.siteSuspeito}` : "SITE NÃO IDENTIFICADO")
+    }else if(siteBloqueado(item.site)){
+        motivos.push(`SITE BLOQUEADO: ${item.site}`)
+        item.siteSuspeito = item.site
+        item.site = ""
+    }
+
+    if(motivos.length){
+        return {
+            tipo: "revisar",
+            item,
+            motivos
+        }
+    }
+
+    return {
+        tipo: "convertidos",
+        item,
+        motivos: []
+    }
+}
+
+function converterLista(){
+    const texto = document.getElementById("entrada").value
+    const linhas = texto.split("\n")
+
+    dados = {
+        convertidos: [],
+        revisar: []
+    }
+
+    const vistos = new Set()
+
+    linhas.forEach(function(linha){
+        const resultado = converterLinha(linha)
+
+        if(!resultado){
+            return
+        }
+
+        if(resultado.tipo === "convertidos"){
+            const final = montarLinha(resultado.item)
+
+            if(!vistos.has(final)){
+                dados.convertidos.push(resultado.item)
+                vistos.add(final)
+            }
+        }else{
+            dados[resultado.tipo].push(resultado)
+        }
+    })
+
+    abaAtual = "convertidos"
+    montarAbas()
+    mostrarAba("convertidos")
+}
+
+function montarAbas(){
+    document.getElementById("abasConversor").innerHTML = `
+        <button class="aba-card card-convertidos ${abaAtual === "convertidos" ? "ativo" : ""}" onclick="mostrarAba('convertidos')">
+            <span>CONVERTIDOS</span>
+            <strong>${dados.convertidos.length}</strong>
+        </button>
+
+        <button class="aba-card card-revisar ${abaAtual === "revisar" ? "ativo" : ""}" onclick="mostrarAba('revisar')">
+            <span>REVISAR</span>
+            <strong>${dados.revisar.length}</strong>
+        </button>
+    `
+}
+
+function mostrarAba(tipo){
+    abaAtual = tipo
+    montarAbas()
+
+    const painel = document.getElementById("painelRevisao")
+
+    if(tipo === "convertidos"){
+        painel.innerHTML = `
+            <div class="titulo-painel">
+                <h2>✅ CONVERTIDOS (${dados.convertidos.length})</h2>
+                <button class="btn-copiar" onclick="copiarConvertidos()">COPIAR CONVERTIDOS</button>
+            </div>
+
+            <textarea id="textoConvertidos" class="lista-final">${dados.convertidos.map(montarLinha).join("\n")}</textarea>
+        `
+        return
+    }
+
+    const lista = dados[tipo]
+
+    painel.innerHTML = `
+        <div class="titulo-painel">
+            <h2>⚠️ REVISAR (${lista.length})</h2>
+            <button class="btn-copiar" onclick="copiarItens('${tipo}')">COPIAR ITENS</button>
+        </div>
+
+        ${
+            lista.length === 0
+            ? "<p>Nenhum item nesta categoria.</p>"
+            : lista.map((registro, index) => criarItemEdicao(registro, tipo, index)).join("")
+        }
+    `
+}
+
+function criarItemEdicao(registro,tipo,index){
+    const item = registro.item
+
+    return `
+        <div class="item-revisao">
+            <div class="motivo">${registro.motivos.join(" | ")}</div>
+
+            <div class="texto-original">
+                <strong>Original:</strong> ${item.original}
+            </div>
+
+            <label>Nome</label>
+            <input id="${tipo}_nome_${index}" value="${item.nome || ""}">
+
+            <label>Site</label>
+            <input id="${tipo}_site_${index}" value="${item.site || item.siteSuspeito || ""}" maxlength="5">
+
+            <label>Chamado</label>
+            <input id="${tipo}_chamado_${index}" value="${item.chamado || ""}">
+
+            <label>Data inicial</label>
+            <input id="${tipo}_inicio_${index}" value="${item.dataInicial || ""}">
+
+            <label>Data final</label>
+            <input id="${tipo}_fim_${index}" value="${item.dataFinal || ""}">
+
+            <div class="botoes-revisao">
+                <button class="btn-copiar" onclick="aprovarItem('${tipo}',${index})">APROVAR</button>
+                <button onclick="bloquearSiteDoItem('${tipo}',${index})">BLOQUEAR SITE</button>
+                <button class="btn-limpar" onclick="removerItem('${tipo}',${index})">REMOVER</button>
+            </div>
+        </div>
+    `
+}
+
+
+function bloquearSiteDoItem(tipo,index){
+    const campo = document.getElementById(`${tipo}_site_${index}`)
+    const site = campo ? campo.value.trim().toUpperCase() : ""
+
+    adicionarSiteBloqueado(site)
+}
+
+function aprovarItem(tipo,index){
+    const nome = limparNome(document.getElementById(`${tipo}_nome_${index}`).value)
+    const site = document.getElementById(`${tipo}_site_${index}`).value.trim().toUpperCase()
+    const chamado = document.getElementById(`${tipo}_chamado_${index}`).value.trim()
+    const dataInicial = document.getElementById(`${tipo}_inicio_${index}`).value.trim()
+    const dataFinal = document.getElementById(`${tipo}_fim_${index}`).value.trim()
+
+    if(!nome || !/^[A-Z]{2}[A-Z0-9]{3}$/.test(site) || siteBloqueado(site) || !/^\d{4,6}$/.test(chamado) || !/^\d{2}\/\d{2}$/.test(dataInicial) || !/^\d{2}\/\d{2}$/.test(dataFinal)){
+        alert("Revise os campos. Site precisa ter 5 caracteres, começar com UF e não estar na lista de bloqueados. Datas em DD/MM.")
+        return
+    }
+
+    const item = {
+        nome,
+        site,
+        chamado,
+        dataInicial,
+        dataFinal
+    }
+
+    dados.convertidos.push(item)
+    dados[tipo].splice(index,1)
+
+    mostrarAba(tipo)
+}
+
+function removerItem(tipo,index){
+    dados[tipo].splice(index,1)
+    mostrarAba(tipo)
+}
+
+function copiarConvertidos(){
+    let texto = ""
+
+    const area = document.getElementById("textoConvertidos")
+
+    if(area){
+        texto = area.value
+    }else{
+        texto = dados.convertidos.map(montarLinha).join("\n")
+    }
+
+    navigator.clipboard.writeText(texto)
+    alert("CONVERTIDOS COPIADOS!")
+}
+
+function copiarItens(tipo){
+    const lista = dados[tipo]
+
+    const texto = lista.map(registro => registro.item.original).join("\n")
+
+    navigator.clipboard.writeText(texto)
+    alert("ITENS COPIADOS!")
+}
+
+function copiarResultadoFinal(){
+    const texto = dados.convertidos.map(montarLinha).join("\n")
+
+    navigator.clipboard.writeText(texto)
+
+    alert("RESULTADO FINAL COPIADO!")
+}
+
+function limparTudo(){
+    document.getElementById("entrada").value = ""
+    document.getElementById("abasConversor").innerHTML = ""
+    document.getElementById("painelRevisao").innerHTML = ""
+
+    dados = {
+        convertidos: [],
+        revisar: []
+    }
+}
+window.addEventListener("DOMContentLoaded", carregarSitesBloqueados)
+</script>
+
+</body>
+</html>

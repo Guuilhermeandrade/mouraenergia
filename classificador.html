@@ -2,1001 +2,551 @@
 <html lang="pt-BR">
 
 <head>
-
-<link rel="icon" type="image/png" href="favicon.ico">
-
+<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>ACESSOS ATIVOS & EXPIRADOS</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 
 <style>
-
-/* =========================
-RESET
-========================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-/* =========================
-BODY
-========================= */
-
-body{
-    font-family:'Inter',sans-serif;
-    min-height:100vh;
-    overflow-x:hidden;
-
-    background:
-    radial-gradient(circle at top left,#3b82f6 0%,transparent 25%),
-    radial-gradient(circle at bottom right,#2563eb 0%,transparent 25%),
-    linear-gradient(135deg,#020617,#0f172a,#1e3a8a);
-
-    padding:40px 20px;
-    position:relative;
-}
-
-/* =========================
-EFEITOS FUNDO
-========================= */
-
-body::before{
-    content:'';
-    position:fixed;
-
-    width:600px;
-    height:600px;
-
-    background:#3b82f6;
-
-    filter:blur(140px);
-
-    opacity:0.18;
-
-    top:-200px;
-    left:-200px;
-
-    animation:flutuar 10s infinite alternate ease-in-out;
-}
-
-body::after{
-    content:'';
-    position:fixed;
-
-    width:500px;
-    height:500px;
-
-    background:#0ea5e9;
-
-    filter:blur(140px);
-
-    opacity:0.15;
-
-    bottom:-200px;
-    right:-200px;
-
-    animation:flutuar2 12s infinite alternate ease-in-out;
-}
-
-@keyframes flutuar{
-
-    from{
-        transform:translate(0,0);
-    }
-
-    to{
-        transform:translate(80px,50px);
-    }
-}
-
-@keyframes flutuar2{
-
-    from{
-        transform:translate(0,0);
-    }
-
-    to{
-        transform:translate(-60px,-40px);
-    }
-}
-
-/* =========================
-CONTAINER
-========================= */
-
-.container{
-    position:relative;
-    z-index:2;
-
-    max-width:1400px;
-    margin:auto;
-
-    background:rgba(15,23,42,0.72);
-
-    backdrop-filter:blur(30px);
-
-    border:1px solid rgba(255,255,255,0.08);
-
-    border-radius:36px;
-
-    padding:40px;
-
-    box-shadow:
-    0 25px 80px rgba(0,0,0,0.45),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-}
-
-/* =========================
-TOPO
-========================= */
-
-.topo{
-    margin-bottom:35px;
-}
-
-.badge{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-
-    background:rgba(59,130,246,0.12);
-
-    border:1px solid rgba(59,130,246,0.25);
-
-    color:#93c5fd;
-
-    padding:10px 16px;
-
-    border-radius:999px;
-
-    font-size:12px;
-    font-weight:700;
-
-    letter-spacing:1px;
-
+.resumo-cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
     margin-bottom:24px;
-
-    backdrop-filter:blur(10px);
 }
 
-/* =========================
-LOGO
-========================= */
-
-.logo{
-    margin-bottom:20px;
-}
-
-.logo img{
-    width:320px;
-    max-width:100%;
-
-    object-fit:contain;
-
-    filter:
-    drop-shadow(0 0 18px rgba(59,130,246,0.35));
-
-    transition:0.3s;
-}
-
-.logo img:hover{
-    transform:scale(1.02);
-}
-
-/* =========================
-SUBTÍTULO
-========================= */
-
-.subtitulo{
-    color:#cbd5e1;
-
-    font-size:17px;
-
-    max-width:800px;
-
-    line-height:1.6;
-}
-
-/* =========================
-ÁREA
-========================= */
-
-.area{
-    background:rgba(255,255,255,0.03);
-
-    border:1px solid rgba(255,255,255,0.06);
-
-    border-radius:28px;
-
-    padding:24px;
-
-    box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.04);
-}
-
-/* =========================
-CONFIG
-========================= */
-
-.config{
-    display:flex;
-    gap:20px;
-
-    margin-bottom:20px;
-
-    flex-wrap:wrap;
-}
-
-.campo{
-    flex:1;
-    min-width:240px;
-}
-
-.campo label{
-    display:block;
-
-    color:#cbd5e1;
-
-    margin-bottom:8px;
-
-    font-size:13px;
-    font-weight:600;
-}
-
-/* =========================
-INPUT
-========================= */
-
-input{
-    width:100%;
-
+.resumo-card{
     border:none;
-    outline:none;
-
-    border-radius:18px;
-
-    padding:16px;
-
-    font-size:14px;
-
-    background:
-    linear-gradient(180deg,#0f172a,#111827);
-
-    color:#e2e8f0;
-
-    box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.06),
-    0 10px 30px rgba(0,0,0,0.25);
-}
-
-/* =========================
-TEXTAREA
-========================= */
-
-textarea{
-    width:100%;
-
-    border:none;
-    outline:none;
-
-    resize:vertical;
-
-    border-radius:24px;
-
-    padding:24px;
-
-    font-size:14px;
-
-    font-family:Consolas,monospace;
-
-    line-height:1.7;
-
+    border-radius:22px;
+    padding:22px;
+    color:white;
+    cursor:pointer;
+    text-align:left;
     transition:0.25s;
+    box-shadow:0 15px 30px rgba(0,0,0,0.18);
 }
 
-#entrada{
-    height:320px;
-
-    background:
-    linear-gradient(180deg,#0f172a,#111827);
-
-    color:#e2e8f0;
-
-    box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.06),
-    0 10px 30px rgba(0,0,0,0.25);
+.resumo-card:hover,
+.resumo-card.ativo-card{
+    transform:translateY(-3px) scale(1.02);
+    box-shadow:0 22px 45px rgba(37,99,235,0.35);
+    outline:2px solid rgba(255,255,255,0.45);
 }
 
-#entrada:focus{
-
-    box-shadow:
-    inset 0 0 0 1px #3b82f6,
-    0 0 30px rgba(59,130,246,0.25);
+.resumo-card span{
+    display:block;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.7px;
+    margin-bottom:8px;
 }
 
-/* =========================
-RESULTADO
-========================= */
+.resumo-card strong{
+    font-size:34px;
+    font-weight:800;
+}
 
-.resultado{
-    margin-top:24px;
+.card-total{background:linear-gradient(135deg,#2563eb,#0ea5e9);}
+.card-ativos{background:linear-gradient(135deg,#16a34a,#22c55e);}
+.card-expirados{background:linear-gradient(135deg,#dc2626,#ef4444);}
+.card-aguardando{background:linear-gradient(135deg,#ca8a04,#eab308);}
 
-    background:
-    linear-gradient(180deg,#eff6ff,#dbeafe);
-
-    border-radius:24px;
-
-    padding:24px;
-
+.area-lista-card{
+    background:linear-gradient(180deg,#eff6ff,#dbeafe);
     color:#0f172a;
-
+    border-radius:24px;
+    padding:24px;
     overflow:auto;
-
     box-shadow:
     inset 0 0 0 1px rgba(59,130,246,0.18),
     0 10px 30px rgba(37,99,235,0.12);
 }
 
-/* =========================
-BLOCOS
-========================= */
-
-.bloco{
-    margin-bottom:35px;
-}
-
-.bloco h2{
-    margin-bottom:18px;
-    font-size:18px;
-}
-
-.ativos h2{
-    color:#166534;
-}
-
-.expirados h2{
-    color:#dc2626;
-}
-
-/* =========================
-TABELA
-========================= */
-
-table{
-    width:100%;
-
-    border-collapse:collapse;
-
-    background:white;
-
-    border-radius:18px;
-
-    overflow:hidden;
-
-    font-size:13px;
-}
-
-thead{
-    background:#2563eb;
-    color:white;
-}
-
-.expirados thead{
-    background:#dc2626;
-}
-
-th,
-td{
-    padding:14px;
-
-    border:1px solid #dbeafe;
-
-    text-align:left;
-}
-
-tbody tr:nth-child(even){
-    background:#f8fafc;
-}
-
-/* =========================
-BOTÕES
-========================= */
-
-.botoes{
+.topo-lista-card{
     display:flex;
+    justify-content:space-between;
     gap:16px;
-
-    margin-top:24px;
-
+    align-items:center;
+    margin-bottom:20px;
     flex-wrap:wrap;
 }
 
-button,
-.voltar{
-    position:relative;
-    overflow:hidden;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border:none;
-
-    border-radius:18px;
-
-    padding:16px 24px;
-
-    font-size:14px;
-    font-weight:700;
-
-    color:white;
-
-    cursor:pointer;
-
-    transition:0.25s;
-
-    min-width:170px;
+.topo-lista-card h2{
+    font-size:20px;
+    color:#0f172a;
 }
 
-button{
-    background:
-    linear-gradient(135deg,#2563eb,#0ea5e9);
-
-    box-shadow:
-    0 15px 30px rgba(37,99,235,0.28);
+.btn-copiar-lista{
+    background:linear-gradient(135deg,#16a34a,#22c55e)!important;
+    box-shadow:0 15px 30px rgba(22,163,74,0.28)!important;
 }
 
-button::before,
-.voltar::before{
-    content:'';
-
-    position:absolute;
-
-    width:100%;
-    height:100%;
-
-    top:0;
-    left:-100%;
-
-    background:
-    linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.25),
-        transparent
-    );
-
-    transition:0.5s;
+.area-copiavel .resumo-cards{
+    display:none;
 }
 
-button:hover::before,
-.voltar:hover::before{
-    left:100%;
+@media(max-width:1000px){
+    .resumo-cards{
+        grid-template-columns:repeat(2,1fr);
+    }
 }
 
-button:hover,
-.voltar:hover{
-    transform:translateY(-2px) scale(1.02);
-}
-
-button:hover{
-    box-shadow:
-    0 18px 40px rgba(37,99,235,0.38);
-}
-
-button:active,
-.voltar:active{
-    transform:scale(0.98);
-}
-
-/* =========================
-BOTÃO VOLTAR
-========================= */
-
-.link-voltar{
-    text-decoration:none;
-}
-
-.voltar{
-    background:
-    linear-gradient(135deg,#dc2626,#ef4444);
-
-    box-shadow:
-    0 15px 30px rgba(220,38,38,0.28);
-}
-
-.voltar:hover{
-    box-shadow:
-    0 18px 40px rgba(220,38,38,0.38);
-}
-
-/* =========================
-FOOTER
-========================= */
-
-.footer{
-    margin-top:25px;
-
-    text-align:center;
-
-    color:#94a3b8;
-
-    font-size:13px;
-
-    letter-spacing:1px;
-}
-
-/* =========================
-RESPONSIVO
-========================= */
-
-@media(max-width:768px){
-
-    .container{
-        padding:24px;
+@media(max-width:600px){
+    .resumo-cards{
+        grid-template-columns:1fr;
     }
 
-    .logo img{
-        width:240px;
+    .topo-lista-card{
+        align-items:stretch;
     }
 
-    button,
-    .voltar{
+    .topo-lista-card button{
         width:100%;
     }
 }
 
-</style>
+/* AJUSTE VISUAL - CARDS MAIS DISCRETOS */
+.resumo-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:12px;
+    margin-bottom:20px;
+}
 
+.resumo-card{
+    border:none;
+    border-radius:16px;
+    padding:14px 16px;
+    color:#e2e8f0;
+    cursor:pointer;
+    text-align:left;
+    transition:0.25s;
+    box-shadow:0 10px 22px rgba(0,0,0,0.18);
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.resumo-card:hover,
+.resumo-card.ativo-card{
+    transform:translateY(-2px);
+    box-shadow:0 14px 28px rgba(37,99,235,0.24);
+    outline:none;
+    border-color:rgba(147,197,253,0.35);
+}
+
+.resumo-card span{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:0.8px;
+    color:#cbd5e1;
+    margin-bottom:4px;
+}
+
+.resumo-card strong{
+    display:block;
+    font-size:24px;
+    font-weight:900;
+    color:white;
+}
+
+.card-total{
+    background:linear-gradient(135deg,rgba(37,99,235,0.88),rgba(14,165,233,0.88));
+}
+
+.card-ativos{
+    background:linear-gradient(135deg,rgba(22,163,74,0.88),rgba(34,197,94,0.88));
+}
+
+.card-expirados{
+    background:linear-gradient(135deg,rgba(220,38,38,0.88),rgba(239,68,68,0.88));
+}
+
+.card-aguardando{
+    background:linear-gradient(135deg,rgba(202,138,4,0.88),rgba(234,179,8,0.88));
+}
+
+</style>
 </head>
 
 <body>
 
+<div class="layout-sistema">
+
+<aside class="sidebar">
+    <div class="sidebar-logo">
+        <img src="assets/img/wesafer.png" alt="WE SAFER">
+    </div>
+
+<nav class="sidebar-menu">
+
+<a href="index.html">
+📋 FORMATADOR
+</a>
+
+<a href="conversor.html">
+🔁 CONVERSOR
+</a>
+
+<a href="classificador.html">
+📊 CLASSIFICADOR
+</a>
+
+</nav>
+</aside>
+
+<div class="conteudo-sistema">
+
 <div class="container">
 
 <header class="topo">
+    <div class="badge">📊 CLASSIFICADOR AUTOMÁTICO - ATIVOS & EXPIRADOS</div>
 
-<div class="badge">
-📊 CLASSIFICADOR AUTOMÁTICO - ATIVOS & EXPIRADOS
-</div>
+    <div class="logo">
+        <img src="assets/img/wesafer.png" alt="WE SAFER">
+    </div>
 
-<div class="logo">
-<img src="wesafer.png" alt="WE SAFER">
-</div>
-
-<p class="subtitulo">
-Cole a lista bruta abaixo e gere automaticamente os ATIVOS e EXPIRADOS organizados em tabela padrão Teams.
-</p>
-
+    <p class="subtitulo">
+        Cole a lista bruta abaixo e gere automaticamente os ATIVOS e EXPIRADOS organizados em tabela padrão Teams.
+    </p>
 </header>
 
 <main class="area">
 
 <section class="config">
-
-<div class="campo">
-
-<label for="dataReferencia">
-DATA DE REFERÊNCIA
-</label>
-
-<input
-type="date"
-id="dataReferencia"
->
-
-</div>
-
+    <div class="campo">
+        <label for="dataReferencia">DATA DE REFERÊNCIA</label>
+        <input type="date" id="dataReferencia">
+    </div>
 </section>
 
-<textarea
-id="entrada"
-placeholder="Cole aqui sua lista bruta..."
-></textarea>
+<textarea id="entrada" placeholder="Cole aqui sua lista bruta..."></textarea>
 
-<div
-id="resultado"
-class="resultado"
-></div>
+<div id="resultado" class="resultado"></div>
 
 <div class="botoes">
-
-<button onclick="gerar()">
-GERAR TABELAS
-</button>
-
-<button onclick="copiarTabela()">
-COPIAR PARA TEAMS
-</button>
-
-<button onclick="limparTudo()">
-LIMPAR
-</button>
-
-<a href="index.html" class="link-voltar">
-
-<div class="voltar">
-VOLTAR
-</div>
-
-</a>
-
+    <button onclick="gerar()">GERAR TABELAS</button>
+    <button class="btn-copiar" onclick="copiarTabelaTeams()">COPIAR PARA TEAMS</button>
+    <button class="btn-limpar" onclick="limparTudo()">LIMPAR</button>
 </div>
 
 </main>
 
-<footer class="footer">
-WeSafer Produtos Digitais Ltda.
-</footer>
+<footer class="footer">WeSafer Produtos Digitais Ltda.</footer>
 
+</div>
+
+</div>
 </div>
 
 <script>
-
-/* =========================
-PARSE DATA
-========================= */
-
-function parseData(data){
-
-    const anoAtual =
-    new Date().getFullYear()
-
-    const [dia,mes] =
-    data.split("/")
-
-    return new Date(
-        anoAtual,
-        mes - 1,
-        dia
-    )
+let dadosClassificador = {
+    teams: [],
+    ativos: [],
+    expirados: [],
+    aguardando: [],
+    dataFormatada: ""
 }
 
-/* =========================
-FORMATAR NOME
-========================= */
+function parseData(data){
+    const anoAtual = new Date().getFullYear()
+    const [dia,mes] = data.split("/")
+    return new Date(anoAtual, mes - 1, dia)
+}
 
 function formatarNome(nome){
-
-    nome = nome.replace(
-        /\((.*?)\)/g,
-        "<strong><em>($1)</em></strong>"
-    )
-
-    nome = nome.replace(
-        /AGUARDANDO LIBERAÇÃO/g,
-        "<strong><em>AGUARDANDO LIBERAÇÃO</em></strong>"
-    )
-
+    nome = nome.replace(/\((.*?)\)/g,"<strong><em>($1)</em></strong>")
+    nome = nome.replace(/AGUARDANDO LIBERAÇÃO/g,"<strong><em>AGUARDANDO LIBERAÇÃO</em></strong>")
     return nome
 }
 
-/* =========================
-GERAR
-========================= */
-
 function gerar(){
-
-    const texto =
-    document
-    .getElementById("entrada")
-    .value
-    .trim()
-
-    const dataRefInput =
-    document
-    .getElementById("dataReferencia")
-    .value
+    const texto = document.getElementById("entrada").value.trim()
+    const dataRefInput = document.getElementById("dataReferencia").value
 
     if(!texto || !dataRefInput){
-
-        alert(
-            "Preencha a data e cole a lista."
-        )
-
+        alert("Preencha a data e cole a lista.")
         return
     }
 
-    const dataRef =
-    new Date(
-        dataRefInput + "T00:00:00"
-    )
-
-    const linhas =
-    texto
-    .split("\n")
-    .filter(
-        linha => linha.trim() !== ""
-    )
+    const dataRef = new Date(dataRefInput + "T00:00:00")
+    const linhas = texto.split("\n").filter(linha => linha.trim() !== "")
 
     let ativos = []
     let expirados = []
+    let aguardando = []
+
+    // Listas usadas apenas na aba TEAMS.
+    // Aqui os itens aguardando liberação entram em ATIVOS ou EXPIRADOS pela data.
+    let ativosTeams = []
+    let expiradosTeams = []
 
     linhas.forEach(linha => {
+        let nome, site, chamado, inicio, fim
 
-        let nome
-        let site
-        let chamado
-        let inicio
-        let fim
+        if(linha.includes(" - ") && linha.includes(":")){
+            const partes = linha.split(" - ")
+            nome = partes[0].trim()
 
-        /* =========================
-        FORMATO 1
-        ========================= */
+            const resto = partes[1].split(":")
+            site = resto[0].trim()
 
-        if(
-            linha.includes(" - ")
-            &&
-            linha.includes(":")
-        ){
-
-            const partes =
-            linha.split(" - ")
-
-            nome =
-            partes[0].trim()
-
-            const resto =
-            partes[1].split(":")
-
-            site =
-            resto[0].trim()
-
-            const dados =
-            resto[1]
-            .trim()
-            .split(" ")
-
-            chamado =
-            parseInt(dados[0])
-
-            inicio =
-            dados[1]
-
-            fim =
-            dados[3]
+            const dados = resto[1].trim().split(" ")
+            chamado = parseInt(dados[0])
+            inicio = dados[1]
+            fim = dados[3]
+        }else{
+            const partes = linha.split(/\s+/)
+            nome = partes.slice(0, partes.length - 4).join(" ")
+            chamado = parseInt(partes[partes.length - 4])
+            site = partes[partes.length - 3]
+            inicio = partes[partes.length - 2]
+            fim = partes[partes.length - 1]
         }
 
-        /* =========================
-        FORMATO 2
-        ========================= */
-
-        else{
-
-            const partes =
-            linha.split(/\s+/)
-
-            nome =
-            partes
-            .slice(0, partes.length - 4)
-            .join(" ")
-
-            chamado =
-            parseInt(
-                partes[partes.length - 4]
-            )
-
-            site =
-            partes[partes.length - 3]
-
-            inicio =
-            partes[partes.length - 2]
-
-            fim =
-            partes[partes.length - 1]
-        }
-
-        const dataFim =
-        parseData(fim)
+        const dataFim = parseData(fim)
 
         const item = {
-
             nome,
             site,
             chamado,
-
-            periodo:
-            `${inicio} À ${fim}`
+            periodo:`${inicio} À ${fim}`
         }
 
+        const ehAguardando =
+        nome.toUpperCase().includes("AGUARDANDO LIBERAÇÃO")
+
+        // Classificação da aba TEAMS: aguardando também entra em ativos/expirados conforme a data.
         if(dataFim <= dataRef){
-
-            expirados.push(item)
-
+            expiradosTeams.push(item)
         }else{
+            ativosTeams.push(item)
+        }
 
+        // Classificação dos cards individuais: aguardando fica separado.
+        if(ehAguardando){
+            aguardando.push(item)
+        }else if(dataFim <= dataRef){
+            expirados.push(item)
+        }else{
             ativos.push(item)
         }
-
     })
 
-    ativos.sort(
-        (a,b)=>a.chamado-b.chamado
-    )
+    ativos.sort((a,b)=>a.chamado-b.chamado)
+    expirados.sort((a,b)=>a.chamado-b.chamado)
+    aguardando.sort((a,b)=>a.chamado-b.chamado)
+    ativosTeams.sort((a,b)=>a.chamado-b.chamado)
+    expiradosTeams.sort((a,b)=>a.chamado-b.chamado)
 
-    expirados.sort(
-        (a,b)=>a.chamado-b.chamado
-    )
+    const [ano, mes, dia] = dataRefInput.split("-")
+    const dataFormatada = `${dia}/${mes}/${ano}`
 
-    function criarTabela(lista,tipo){
-
-        if(lista.length === 0){
-
-            return `
-            <p>
-                Nenhum registro.
-            </p>
-            `
-        }
-
-        return `
-
-        <div class="bloco ${tipo}">
-
-            <h2>
-
-                ${
-                    tipo === "ativos"
-                    ? "🟢 ATIVOS"
-                    : "🔴 EXPIRADOS"
-                }
-
-            </h2>
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Nome do Técnico
-                        </th>
-
-                        <th>
-                            Nº do Chamado
-                        </th>
-
-                        <th>
-                            Site
-                        </th>
-
-                        <th>
-                            Período
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    ${lista.map(item => `
-
-                    <tr>
-
-                        <td>
-                            ${formatarNome(item.nome)}
-                        </td>
-
-                        <td>
-                            ${item.chamado}
-                        </td>
-
-                        <td>
-                            ${item.site}
-                        </td>
-
-                        <td>
-                            ${item.periodo}
-                        </td>
-
-                    </tr>
-
-                    `).join("")}
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-        `
+    dadosClassificador = {
+        teams: [...ativosTeams, ...expiradosTeams],
+        ativos,
+        expirados,
+        aguardando,
+        ativosTeams,
+        expiradosTeams,
+        total: linhas.length,
+        dataFormatada
     }
 
-    document
-   const [ano, mes, dia] =
-dataRefInput.split("-")
-
-const dataFormatada =
-`${dia}/${mes}/${ano}`
-
-const cabecalho = `
-
-<div style="
-margin-bottom:25px;
-font-weight:700;
-font-size:15px;
-line-height:1.7;
-">
-
-Boa noite,<br><br>
-
-SEGUE A LISTA ATUALIZADA DE ACESSOS AUTORIZADOS - ${dataFormatada}
-
-</div>
-
-`
-
-document
-.getElementById("resultado")
-.innerHTML =
-
-cabecalho +
-
-criarTabela(ativos,"ativos")
-+
-criarTabela(expirados,"expirados")
+    montarResultado()
+    mostrarLista("teams")
 }
 
-/* =========================
-COPIAR
-========================= */
+function montarCards(){
+    return `
+    <div class="resumo-cards nao-copiar">
+        <div class="resumo-card card-total" id="card-teams" onclick="mostrarLista('teams')">
+            <span>TEAMS</span>
+            <strong>${dadosClassificador.total}</strong>
+        </div>
 
-function copiarTabela(){
+        <div class="resumo-card card-ativos" id="card-ativos" onclick="mostrarLista('ativos')">
+            <span>ATIVOS</span>
+            <strong>${dadosClassificador.ativos.length}</strong>
+        </div>
 
-    const resultado =
-    document.getElementById("resultado")
+        <div class="resumo-card card-expirados" id="card-expirados" onclick="mostrarLista('expirados')">
+            <span>EXPIRADOS</span>
+            <strong>${dadosClassificador.expirados.length}</strong>
+        </div>
 
-    const range =
-    document.createRange()
+        <div class="resumo-card card-aguardando" id="card-aguardando" onclick="mostrarLista('aguardando')">
+            <span>AGUARDANDO LIBERAÇÃO</span>
+            <strong>${dadosClassificador.aguardando.length}</strong>
+        </div>
+    </div>
+    `
+}
 
-    range.selectNode(resultado)
+function montarResultado(){
+    document.getElementById("resultado").innerHTML = `
+        ${montarCards()}
+        <div id="areaListaCard" class="area-lista-card"></div>
+    `
+}
 
-    const selection =
-    window.getSelection()
+function criarTabela(lista,tipo){
+    if(lista.length === 0){
+        return `<p>Nenhum registro.</p>`
+    }
 
+    return `
+    <div class="bloco ${tipo}">
+        <h2>${tipo === "ativos" ? "🟢 ATIVOS" : tipo === "expirados" ? "🔴 EXPIRADOS" : tipo === "aguardando" ? "🟡 AGUARDANDO LIBERAÇÃO" : "📋 LISTA TEAMS"}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome do Técnico</th>
+                    <th>Nº do Chamado</th>
+                    <th>Site</th>
+                    <th>Período</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${lista.map(item => `
+                <tr>
+                    <td>${formatarNome(item.nome)}</td>
+                    <td>${item.chamado}</td>
+                    <td>${item.site}</td>
+                    <td>${item.periodo}</td>
+                </tr>
+                `).join("")}
+            </tbody>
+        </table>
+    </div>
+    `
+}
+
+function criarConteudoTeams(){
+    return `
+    <div class="area-copiavel" id="conteudoCopiavel">
+        <div style="margin-bottom:25px;font-weight:700;font-size:15px;line-height:1.7;">
+            Boa noite,<br><br>
+            SEGUE A LISTA ATUALIZADA DE ACESSOS AUTORIZADOS - ${dadosClassificador.dataFormatada}
+        </div>
+        ${criarTabela(dadosClassificador.ativosTeams,"ativos")}
+        ${criarTabela(dadosClassificador.expiradosTeams,"expirados")}
+    </div>
+    `
+}
+
+function criarConteudoSimples(tipo){
+    return `
+    <div class="area-copiavel" id="conteudoCopiavel">
+        ${criarTabela(dadosClassificador[tipo],tipo)}
+    </div>
+    `
+}
+
+function mostrarLista(tipo){
+    document.querySelectorAll(".resumo-card").forEach(card => {
+        card.classList.remove("ativo-card")
+    })
+
+    const cardSelecionado = document.getElementById(`card-${tipo}`)
+    if(cardSelecionado){
+        cardSelecionado.classList.add("ativo-card")
+    }
+
+    const area = document.getElementById("areaListaCard")
+
+    let titulo = ""
+    let conteudo = ""
+
+    if(tipo === "teams"){
+        titulo = `📋 TEAMS (${dadosClassificador.total})`
+        conteudo = criarConteudoTeams()
+    }
+
+    if(tipo === "ativos"){
+        titulo = `🟢 ATIVOS (${dadosClassificador.ativos.length})`
+        conteudo = criarConteudoSimples("ativos")
+    }
+
+    if(tipo === "expirados"){
+        titulo = `🔴 EXPIRADOS (${dadosClassificador.expirados.length})`
+        conteudo = criarConteudoSimples("expirados")
+    }
+
+    if(tipo === "aguardando"){
+        titulo = `🟡 AGUARDANDO LIBERAÇÃO (${dadosClassificador.aguardando.length})`
+        conteudo = criarConteudoSimples("aguardando")
+    }
+
+    area.innerHTML = `
+    <div class="topo-lista-card nao-copiar">
+        <h2>${titulo}</h2>
+        <button class="btn-copiar-lista" onclick="copiarListaAtual()">COPIAR LISTA</button>
+    </div>
+    ${conteudo}
+    `
+}
+
+function copiarListaAtual(){
+    const conteudo = document.getElementById("conteudoCopiavel")
+
+    if(!conteudo){
+        alert("Gere uma lista primeiro.")
+        return
+    }
+
+    copiarElemento(conteudo)
+}
+
+function copiarTabelaTeams(){
+    mostrarLista("teams")
+    const conteudo = document.getElementById("conteudoCopiavel")
+
+    if(!conteudo){
+        alert("Gere uma lista primeiro.")
+        return
+    }
+
+    copiarElemento(conteudo)
+}
+
+function copiarElemento(elemento){
+    const clone = elemento.cloneNode(true)
+
+    clone.querySelectorAll(".nao-copiar").forEach(item => {
+        item.remove()
+    })
+
+    const areaTemporaria = document.createElement("div")
+    areaTemporaria.style.position = "fixed"
+    areaTemporaria.style.left = "-9999px"
+    areaTemporaria.appendChild(clone)
+
+    document.body.appendChild(areaTemporaria)
+
+    const range = document.createRange()
+    range.selectNode(clone)
+
+    const selection = window.getSelection()
     selection.removeAllRanges()
-
     selection.addRange(range)
 
     document.execCommand("copy")
 
     selection.removeAllRanges()
+    document.body.removeChild(areaTemporaria)
 
-    alert(
-        "TABELA COPIADA PARA O TEAMS!"
-    )
+    alert("LISTA COPIADA!")
 }
-
-/* =========================
-LIMPAR
-========================= */
 
 function limparTudo(){
-
-    document
-    .getElementById("entrada")
-    .value = ""
-
-    document
-    .getElementById("resultado")
-    .innerHTML = ""
-
-    document
-    .getElementById("dataReferencia")
-    .value = ""
+    document.getElementById("entrada").value = ""
+    document.getElementById("resultado").innerHTML = ""
+    document.getElementById("dataReferencia").value = ""
 }
-
 </script>
 
 </body>
