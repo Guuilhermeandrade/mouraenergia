@@ -70,7 +70,6 @@ body::after{
     top:0;
     z-index:10;
     box-shadow:12px 0 40px rgba(0,0,0,0.25);
-
     display:flex;
     flex-direction:column;
 }
@@ -104,14 +103,40 @@ body::after{
     transition:0.25s;
     border:1px solid transparent;
     width:100%;
+    position:relative;
 }
 
 .sidebar-menu a:hover,
 .sidebar-menu a.ativo{
     color:white;
-    background:linear-gradient(135deg,#2563eb,#0ea5e9);
-    box-shadow:0 15px 30px rgba(37,99,235,0.28);
-    border-color:rgba(255,255,255,0.10);
+    background:rgba(37,99,235,.18);
+    border:1px solid rgba(147,197,253,.25);
+    box-shadow:none;
+}
+
+.sidebar-menu a.ativo::before{
+    content:'';
+    position:absolute;
+    left:-20px;
+    top:50%;
+    transform:translateY(-50%);
+    width:4px;
+    height:24px;
+    border-radius:999px;
+    background:#38bdf8;
+}
+
+.sidebar::after{
+    content:'WESAFER TOOLS\A VERSÃO 2.4';
+    white-space:pre-line;
+    margin-top:auto;
+    padding-top:18px;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:#94a3b8;
+    font-size:11px;
+    line-height:1.6;
+    font-weight:900;
+    letter-spacing:1px;
 }
 
 .conteudo-sistema{
@@ -128,14 +153,59 @@ body::after{
     background:rgba(15,23,42,0.72);
     backdrop-filter:blur(30px);
     border:1px solid rgba(255,255,255,0.08);
-    border-radius:36px;
-    padding:38px;
+    border-radius:28px;
+    padding:32px;
     box-shadow:
     0 25px 80px rgba(0,0,0,0.45),
     inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
-.topo{ margin-bottom:30px; }
+.topo{
+    margin-bottom:30px;
+}
+
+.topo-sistema{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:40px;
+    margin-bottom:28px;
+}
+
+.topo-info{
+    flex:1;
+}
+
+.topo-info h1{
+    color:#fff;
+    font-size:30px;
+    font-weight:900;
+    margin:16px 0 8px;
+}
+
+.topo-info .subtitulo{
+    color:#e2e8f0;
+    font-size:16px;
+    line-height:1.5;
+    max-width:720px;
+}
+
+.topo-logo{
+    padding-top:28px;
+    min-width:180px;
+    display:flex;
+    justify-content:flex-end;
+}
+
+.topo-logo img{
+    width:170px;
+    opacity:.55;
+    filter:drop-shadow(0 0 18px rgba(59,130,246,.25));
+}
+
+.topo-sistema .logo{
+    display:none;
+}
 
 .badge{
     display:inline-flex;
@@ -153,17 +223,21 @@ body::after{
     backdrop-filter:blur(10px);
 }
 
-.logo{ margin-bottom:18px; }
+.logo{
+    margin-bottom:18px;
+}
 
 .logo img{
-    width:240px;
+    width:150px;
     max-width:100%;
     object-fit:contain;
     filter:drop-shadow(0 0 18px rgba(59,130,246,0.35));
     transition:0.3s;
 }
 
-.logo img:hover{ transform:scale(1.02); }
+.logo img:hover{
+    transform:scale(1.02);
+}
 
 .subtitulo{
     color:#cbd5e1;
@@ -175,7 +249,7 @@ body::after{
 .area{
     background:rgba(255,255,255,0.035);
     border:1px solid rgba(255,255,255,0.07);
-    border-radius:28px;
+    border-radius:26px;
     padding:24px;
     box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
 }
@@ -214,7 +288,9 @@ input{
     0 10px 30px rgba(0,0,0,0.25);
 }
 
-input[type="date"]{ color-scheme:dark; }
+input[type="date"]{
+    color-scheme:dark;
+}
 
 textarea{
     width:100%;
@@ -230,7 +306,8 @@ textarea{
 }
 
 #entrada{
-    height:320px;
+    height:330px;
+    border-radius:22px;
     background:linear-gradient(180deg,#0f172a,#111827);
     color:#e2e8f0;
     box-shadow:
@@ -266,7 +343,9 @@ textarea{
     0 10px 30px rgba(37,99,235,0.12);
 }
 
-.resultado:empty{ display:none; }
+.resultado:empty{
+    display:none;
+}
 
 .resumo-cards{
     display:grid;
@@ -302,8 +381,73 @@ textarea{
 .card-expirados{ background:linear-gradient(135deg,#dc2626,#ef4444); }
 .card-aguardando{ background:linear-gradient(135deg,#ca8a04,#eab308); }
 
-.bloco{ margin-bottom:35px; }
-.bloco h2{ margin-bottom:18px; font-size:18px; }
+.abas-conversor{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-top:24px;
+}
+
+.aba-card{
+    min-height:82px;
+    border-radius:16px;
+    padding:16px;
+    color:#e2e8f0;
+    cursor:pointer;
+    text-align:left;
+    transition:0.25s;
+    box-shadow:0 10px 22px rgba(0,0,0,0.18);
+    border:1px solid rgba(255,255,255,0.08);
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    justify-content:center !important;
+    gap:6px !important;
+}
+
+.aba-card:hover,
+.aba-card.ativo{
+    transform:translateY(-2px);
+    box-shadow:0 14px 28px rgba(37,99,235,0.24);
+    border-color:rgba(147,197,253,0.35);
+}
+
+.aba-card span{
+    display:block !important;
+    width:100% !important;
+    font-size:11px !important;
+    line-height:1.2 !important;
+    letter-spacing:1px;
+    white-space:nowrap;
+    color:#cbd5e1;
+}
+
+.aba-card strong{
+    display:block !important;
+    width:100% !important;
+    font-size:28px !important;
+    line-height:1 !important;
+    white-space:nowrap;
+    color:white;
+}
+
+.card-convertidos{
+    background:linear-gradient(135deg,rgba(22,163,74,0.85),rgba(34,197,94,0.85));
+}
+
+.card-revisar{
+    background:linear-gradient(135deg,rgba(202,138,4,0.85),rgba(234,179,8,0.85));
+}
+
+.bloco{
+    margin-bottom:35px;
+}
+
+.bloco h2{
+    margin-bottom:18px;
+    font-size:18px;
+}
+
 .ativos h2{ color:#166534; }
 .expirados h2{ color:#dc2626; }
 
@@ -316,8 +460,14 @@ table{
     font-size:13px;
 }
 
-thead{ background:#2563eb; color:white; }
-.expirados thead{ background:#dc2626; }
+thead{
+    background:#2563eb;
+    color:white;
+}
+
+.expirados thead{
+    background:#dc2626;
+}
 
 th,td{
     padding:14px;
@@ -325,7 +475,9 @@ th,td{
     text-align:left;
 }
 
-tbody tr:nth-child(even){ background:#f8fafc; }
+tbody tr:nth-child(even){
+    background:#f8fafc;
+}
 
 .botoes{
     display:flex;
@@ -343,10 +495,10 @@ button,
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    min-height:50px;
+    min-height:52px;
     border:none;
-    border-radius:18px;
-    padding:16px 24px;
+    border-radius:16px;
+    padding:15px 26px;
     font-size:14px;
     font-weight:800;
     color:white;
@@ -372,7 +524,9 @@ button::before,
 
 button:hover::before,
 .botao:hover::before,
-.botoes a:hover::before{ left:100%; }
+.botoes a:hover::before{
+    left:100%;
+}
 
 button:hover,
 .botao:hover,
@@ -383,7 +537,9 @@ button:hover,
 
 button:active,
 .botao:active,
-.botoes a:active{ transform:scale(0.98); }
+.botoes a:active{
+    transform:scale(0.98);
+}
 
 .btn-copiar{
     background:linear-gradient(135deg,#16a34a,#22c55e);
@@ -395,6 +551,77 @@ button:active,
     box-shadow:0 15px 30px rgba(220,38,38,0.24);
 }
 
+.config-bloqueados{
+    margin-top:22px;
+    background:rgba(15,23,42,0.35);
+    border:1px solid rgba(148,163,184,0.18);
+    border-radius:18px;
+    padding:14px 16px;
+    color:#cbd5e1;
+}
+
+.config-bloqueados summary{
+    cursor:pointer;
+    font-weight:800;
+    color:#93c5fd;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.config-bloqueados .dica{
+    color:#94a3b8;
+    font-size:12px;
+    line-height:1.5;
+    margin-top:6px;
+}
+
+.config-bloqueados textarea{
+    margin-top:12px;
+    min-height:95px;
+    max-height:150px;
+    background:linear-gradient(180deg,#0f172a,#111827);
+    color:#e2e8f0;
+    font-size:12px;
+    border-radius:16px;
+    padding:14px;
+}
+
+.config-bloqueados .botoes{
+    margin-top:12px;
+}
+
+.config-bloqueados button{
+    min-height:42px;
+    padding:10px 16px;
+    font-size:12px;
+    border-radius:14px;
+}
+
+.data-wrapper{
+    width:100%;
+    cursor:pointer;
+    border-radius:18px;
+    transition:.2s;
+}
+
+.data-wrapper:hover{
+    transform:translateY(-1px);
+}
+
+.data-wrapper input{
+    width:100%;
+    cursor:pointer;
+}
+
+#dataReferencia::-webkit-calendar-picker-indicator{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    cursor:pointer;
+    opacity:0;
+}
+
 .footer{
     margin-top:25px;
     text-align:center;
@@ -403,8 +630,29 @@ button:active,
     letter-spacing:1px;
 }
 
+@media(max-width:900px){
+    .topo-sistema{
+        flex-direction:column;
+    }
+
+    .topo-logo{
+        justify-content:flex-start;
+        padding-top:0;
+    }
+
+    .topo-logo img{
+        width:130px;
+    }
+
+    .abas-conversor{
+        grid-template-columns:1fr;
+    }
+}
+
 @media(max-width:768px){
-    .layout-sistema{ display:block; }
+    .layout-sistema{
+        display:block;
+    }
 
     .sidebar{
         position:relative;
@@ -419,9 +667,17 @@ button:active,
         padding:20px 12px;
     }
 
-    .container{ padding:24px; }
-    .logo img{ width:220px; }
+    .container{
+        padding:24px;
+    }
+
+    .logo img{
+        width:150px;
+    }
+
     button,
     .botao,
-    .botoes a{ width:100%; }
+    .botoes a{
+        width:100%;
+    }
 }

@@ -306,7 +306,7 @@
 📋 FORMATADOR
 </a>
 
-<a href="conversor.html">
+<a href="conversor.html" class="ativo">
 🔁 CONVERSOR
 </a>
 
@@ -321,16 +321,25 @@
 
 <div class="container">
 
-<header class="topo">
-    <div class="badge">🔁 CONVERSOR INTELIGENTE DE LISTAS</div>
+<header class="topo topo-sistema">
 
-    <div class="logo">
+    <div class="topo-info">
+
+        <div class="badge">
+            🔁 CONVERSOR INTELIGENTE DE LISTAS
+        </div>
+
+        
+        <p class="subtitulo">
+            Converta listas para o padrão corporativo. Linhas claramente inúteis são ignoradas; dúvidas ficam em revisão para você corrigir.
+        </p>
+
+    </div>
+
+    <div class="topo-logo">
         <img src="assets/img/wesafer.png" alt="WE SAFER">
     </div>
 
-    <p class="subtitulo">
-        Converta listas para o padrão corporativo. Linhas claramente inúteis são ignoradas; dúvidas ficam em revisão para você corrigir.
-    </p>
 </header>
 
 <main class="area">
@@ -379,9 +388,46 @@ const REGEX_SITE_QUALQUER = /\b[A-Z0-9]{5}\b/i
 const REGEX_SITE_QUALQUER_GLOBAL = /\b[A-Z0-9]{5}\b/gi
 
 const SITES_BLOQUEADOS_PADRAO = [
-    "PABLO","ALVES","ROCHA","PAULA","SILVA","COSTA","LEITE","JESUS",
-    "BRITO","CAZAL","PAIVA","LIMA","NEVES","LOPES","SOUZA","SANTO",
-    "PANAIA","MARIA"
+    "PABLO",
+    "ALVES",
+    "ROCHA",
+    "PAULA",
+    "SILVA",
+    "COSTA",
+    "LEITE",
+    "JESUS",
+    "BRITO",
+    "CAZAL",
+    "PAIVA",
+    "LIMA",
+    "NEVES",
+    "LOPES",
+    "SOUZA",
+    "SANTO",
+    "PANAIA",
+    "MARIA",
+    "PAULO",
+    "CEZAR",
+    "CESAR",
+    "MAGNO",
+    "GOMES",
+    "PIRES",
+    "ROSSI",
+    "TOBIA",
+    "AMARO",
+    "MAURO",
+    "PEDRO",
+    "SERGI",
+    "ACACI",
+    "ALANA",
+    "BAETA",
+    "CECIL",
+    "ESDRA",
+    "GOIAN",
+    "MIGUE",
+    "PRIMO",
+    "RONAL",
+    "SCOTT"
 ]
 
 let sitesBloqueados = []
@@ -394,16 +440,12 @@ let dados = {
 let abaAtual = "convertidos"
 
 function carregarSitesBloqueados(){
-    const salvo = localStorage.getItem("sitesBloqueadosConversor")
+    sitesBloqueados = [...SITES_BLOQUEADOS_PADRAO]
 
-    if(salvo){
-        sitesBloqueados = salvo
-            .split(/\n|,|;/)
-            .map(item => item.trim().toUpperCase())
-            .filter(Boolean)
-    }else{
-        sitesBloqueados = [...SITES_BLOQUEADOS_PADRAO]
-    }
+    localStorage.setItem(
+        "sitesBloqueadosConversor",
+        sitesBloqueados.join("\n")
+    )
 
     const campo = document.getElementById("sitesBloqueados")
 
