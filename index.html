@@ -73,7 +73,9 @@
     <button class="btn-limpar" onclick="limparTudo()">LIMPAR</button>
 </div>
 
-<textarea id="saida" readonly></textarea>
+<div id="blocoResultado" style="display:none;">
+    <textarea id="saida" readonly></textarea>
+</div>
 
 </div>
 
@@ -173,6 +175,7 @@ TÉCNICO: ${tecnico}
 AÇÃO: ${acao}`
 
     document.getElementById("saida").value = resultado
+    document.getElementById("blocoResultado").style.display = "block"
 }
 
 function copiarResultado(){
@@ -184,6 +187,7 @@ function copiarResultado(){
 function limparTudo(){
     document.getElementById("entrada").value = ""
     document.getElementById("saida").value = ""
+    document.getElementById("blocoResultado").style.display = "none"
 }
 </script>
 

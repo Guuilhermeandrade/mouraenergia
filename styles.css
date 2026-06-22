@@ -681,3 +681,11 @@ button:active,
         width:100%;
     }
 }
+#blocoResultado{
+    display:none;
+    margin-top:20px;
+}
+
+#saida{
+    width:100%;
+}
